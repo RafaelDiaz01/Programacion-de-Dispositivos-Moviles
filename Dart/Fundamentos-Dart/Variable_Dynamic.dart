@@ -8,4 +8,6 @@ void main (){
   errorMessage = [1,2,3]; // Lista
   errorMessage = () => true; // Función que devuelve un booleano
   errorMessage = null; // Nulo
+
+  print(errorMessage);
 }
