@@ -1,5 +1,5 @@
 // Kevin Rafael Díaz López - 27/03/2025
-// Name constructors en Dart.
+// Name constructors en Dart (ej: para respuestas http).
 
 void main (){
 
@@ -10,9 +10,9 @@ void main (){
   };
 
   // Llamamos a nuestro constructor nombrado.
-  final ironman = Hero.fromJson(rawJson);
+  final batman = Hero.fromJson(rawJson);
 
-  print('Personaje: $ironman');
+  print('Personaje: $batman');
   
 }
 
