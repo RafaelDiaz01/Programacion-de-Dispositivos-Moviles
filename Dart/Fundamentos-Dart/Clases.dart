@@ -1,3 +1,5 @@
+// Kevin Rafael Díaz López - 27/03/2025
+// Clases y constructores en Dart. 
 void main (){
 
   final Hero increibles = new Hero('Mr.Increíle', 'Superfuerza'); // Llamada al constructor
@@ -26,14 +28,13 @@ class Hero {
   Hero( String pName, String pPower)
     : name = pName
       power = pPower;
-      
   */
 }
 
 // Clase de villanos
 class Villain {
-  String name = '';
-  String power = '';
+  String name ;
+  String power ;
 
   Villain( this. name, this.power); // Otra forma de inicializar un constructor.
 }
