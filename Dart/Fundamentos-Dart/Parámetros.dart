@@ -1,6 +1,8 @@
+// Kevin Rafael Díaz López - 27/03/2025
+// Parámetros en Dart.
 void main (){
 
-  print(greetPerson(name: 'Kevin', message: 'Hi'));
+  print(greetPerson(name: 'Kevin', message: 'Hi')); // Imprime en consola.
   
 }
 
