@@ -5,8 +5,8 @@ void main() {
   runApp(
     MaterialApp(
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-        body: MyWiget2(),
+        backgroundColor:Color.fromARGB(255, 0, 0, 0),
+        body: MyWidget2(Color.fromARGB(255, 255, 254, 249), Color.fromARGB(255, 252, 191, 25)),
       ),
     )
   );
