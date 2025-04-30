@@ -85,7 +85,7 @@ class _HomeDadoState extends State<HomeDado> {
               ElevatedButton(
                 onPressed: girarDado,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 13, 146, 9),
+                  backgroundColor: const Color.fromARGB(255, 250, 225, 4),
                   textStyle: TextStyle(fontSize: 20),
                   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                 ),
