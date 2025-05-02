@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:girar_foto/questions.dart';
 import 'package:girar_foto/quiz_body.dart';
+import 'package:girar_foto/quiz_results.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +16,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   /* Widget? currentScreen; Variable de tipo Widget para intercambiar entre pantallas.*/
-  String currentScreen = "home-scrreen";
+  String currentScreen = "home-screen";
+  final List<String> selectedAnswers = []; // Lista para guardar las respuestas seleccionadas.
 
   /* Método para darle prioridad a alguna pantalla
   @override
@@ -28,14 +31,25 @@ class _MyAppState extends State<MyApp> {
   void switchScreen() {
     setState(() {
       currentScreen = "question-screen";
+      selectedAnswers.clear();
     });
+  }
+
+  void addSelectedAnswer(String answer) {
+    selectedAnswers.add(answer);
+    //print(selectedAnswers); Imprime en consola la lista de respuestas seleccionadas.
+    if (selectedAnswers.length == listQuestions.length) {
+      setState(() {
+        currentScreen = "home-screen";
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     Widget screen = MyHomePage(startQuiz: switchScreen);
-    if (currentScreen == "question-screen"){
-      screen = QuizBody();
+    if (currentScreen == "question-screen") {
+      screen = QuizBody(addSelectedAnswer: addSelectedAnswer);
     }
     return MaterialApp(
       title: 'Quiz App',
@@ -50,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      home: screen,
+      home: QuizResults(), // screen debe estar
     );
   }
 }

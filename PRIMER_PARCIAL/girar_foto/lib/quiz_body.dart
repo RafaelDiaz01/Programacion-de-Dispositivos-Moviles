@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:girar_foto/questions.dart';
+//import 'package:girar_foto/quiz_results.dart';
 
 class QuizBody extends StatefulWidget {
-const QuizBody ({super.key});
+  const QuizBody({super.key, required this.addSelectedAnswer});
+
+  final void Function(String)
+  addSelectedAnswer; // Función para guardar las respuestas.
 
   @override
   State<QuizBody> createState() => _QuizBodyState();
@@ -11,7 +15,9 @@ const QuizBody ({super.key});
 class _QuizBodyState extends State<QuizBody> {
   int _questionNumber = 0;
 
-  void onSelectedAnswer() {
+  void onSelectedAnswer(String answers) {
+    widget.addSelectedAnswer(answers);
+
     setState(() {
       _questionNumber++;
     });
@@ -23,22 +29,31 @@ class _QuizBodyState extends State<QuizBody> {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(158, 198, 243, 10),          
-        ),
+        decoration: BoxDecoration(color: Color.fromRGBO(158, 198, 243, 10)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(currentQuestion.textQuestion, style: TextStyle(fontSize: 30), textAlign: TextAlign.center,),
+              Text(
+                currentQuestion.textQuestion,
+                style: TextStyle(fontSize: 30),
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 20),
-              
+
               ...currentQuestion.shuffleAnswers().map((answers) {
                 return Column(
                   children: [
-                    SizedBox(height: 15,), ElevatedButton(onPressed: onSelectedAnswer, child: Text(answers))
+                    SizedBox(height: 15),
+                    ElevatedButton(
+                      onPressed: () {
+                        onSelectedAnswer(answers);
+                      },
+                      child: Text(answers),
+                    ),
                   ],
-                );})
+                );
+              }),
             ],
           ),
         ),
