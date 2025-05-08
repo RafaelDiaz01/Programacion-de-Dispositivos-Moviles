@@ -58,6 +58,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  # Aquí cargamos las imagenes para el proyecto.
   assets:
     - assets/images/comp1.jpeg
     - assets/images/comp2.jpeg
