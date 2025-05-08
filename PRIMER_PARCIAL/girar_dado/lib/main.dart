@@ -1,3 +1,6 @@
+// Kevin Rafael Díaz López - 08/05/2024
+// Programa que gira un dado y muestra una cara de forma aleatoria.
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
@@ -73,7 +76,7 @@ class _HomeDadoState extends State<HomeDado> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [Colors.white, Color.fromARGB(255, 236, 233, 7)],
-            radius: 1.1,
+            radius: 0.6,
           ),
         ),
         child: Center(
@@ -85,9 +88,9 @@ class _HomeDadoState extends State<HomeDado> {
               ElevatedButton(
                 onPressed: girarDado,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 13, 146, 9),
+                  backgroundColor: const Color.fromARGB(255, 16, 189, 146),
                   textStyle: TextStyle(fontSize: 20),
-                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
                 ),
                 child: Text("Girar Dado"),
               ),
