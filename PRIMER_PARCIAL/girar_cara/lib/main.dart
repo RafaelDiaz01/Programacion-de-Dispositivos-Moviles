@@ -6,7 +6,7 @@ void main() {
   runApp(MyApp());
 }
 
-// Creamos el objeto
+// Creamos el objeto.
 class MyApp extends StatelessWidget {
   // Crea el constructor
   const MyApp({super.key});
