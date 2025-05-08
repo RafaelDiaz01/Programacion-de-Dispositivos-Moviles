@@ -40,9 +40,17 @@ class _MyAppState extends State<MyApp> {
     //print(selectedAnswers); Imprime en consola la lista de respuestas seleccionadas.
     if (selectedAnswers.length == listQuestions.length) {
       setState(() {
-        currentScreen = "home-screen";
+        currentScreen = "results-screen";
       });
     }
+  }
+
+  // Función para regresar al inicio del Quiz
+  void home(){
+    setState(() {
+      currentScreen = "home-screen";
+      selectedAnswers.clear();
+    });
   }
 
   @override
@@ -50,6 +58,10 @@ class _MyAppState extends State<MyApp> {
     Widget screen = MyHomePage(startQuiz: switchScreen);
     if (currentScreen == "question-screen") {
       screen = QuizBody(addSelectedAnswer: addSelectedAnswer);
+    } 
+
+    if (currentScreen == "results-screen") {
+      screen = QuizResults(selectedAnswers: selectedAnswers, home: home,);
     }
     return MaterialApp(
       title: 'Quiz App',
@@ -64,7 +76,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      home: QuizResults(), // screen debe estar
+      home: screen, // screen debe estar
     );
   }
 }

@@ -44,14 +44,14 @@ class _HomeDadoState extends State<HomeDado> {
         "assets/images/comp3.jpeg",
         "assets/images/comp4.jpeg",
         "assets/images/comp5.jpeg",
-        "assets/images/comp6.jpeg"
+        "assets/images/comp6.jpeg",
       ];
 
       var duracion = Duration(milliseconds: 200);
 
       for (var dado in listaDados) {
         setState(() {
-        _rutaDado = dado;
+          _rutaDado = dado;
         });
         await Future.delayed(duracion);
       }
@@ -72,20 +72,33 @@ class _HomeDadoState extends State<HomeDado> {
       body: Container(
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: [Colors.white, Color.fromARGB(255, 236, 233, 7)],
-            radius: 1.1,
+            colors: [Colors.white, Colors.lightGreen],
+            radius: 0.5,
           ),
         ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 255, 255, 10),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                width: 300,
+                child: Text(
+                  "Alumnos del 603",
+                  style: TextStyle(fontSize: 35),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 70),
               Image.asset(_rutaDado, width: 220),
-              SizedBox(height: 30),
+              SizedBox(height: 50),
               ElevatedButton(
                 onPressed: girarDado,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 250, 225, 4),
+                  backgroundColor: const Color.fromARGB(255, 12, 12, 12),
                   textStyle: TextStyle(fontSize: 20),
                   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                 ),

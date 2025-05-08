@@ -34,13 +34,19 @@ class _QuizBodyState extends State<QuizBody> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                currentQuestion.textQuestion,
-                style: TextStyle(fontSize: 30),
-                textAlign: TextAlign.center,
+              Container(
+                color: Color.fromRGBO(255, 255, 255, 10),
+                child: Column(
+                  children: [
+                    Text(
+                      currentQuestion.textQuestion,
+                      style: TextStyle(fontSize: 30),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 20),
-
               ...currentQuestion.shuffleAnswers().map((answers) {
                 return Column(
                   children: [
@@ -54,6 +60,12 @@ class _QuizBodyState extends State<QuizBody> {
                   ],
                 );
               }),
+              SizedBox(height: 100,),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.home_filled),
+                label: Text("Home"),
+              ),
             ],
           ),
         ),
