@@ -1,3 +1,6 @@
+// Kevin Rafael Díaz López - 08/05/2024
+// Programa que muestra la imagen de un alumno del 603 y un botón, el botón sirve para mostrar una imagen aleatoriamente.
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
