@@ -1,49 +1,68 @@
 // Kevin Rafael Díaz López - 08/05/2024
-// Programa que muestra la imagen de un alumno del 603 y un botón, el botón sirve para mostrar una imagen aleatoriamente.
+// Programa que elige un ganador de un sorteo entre los alumnos del grupo 603.
 
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'dart:async';
+import 'dart:math'; // Para generación de números aleatorios
+import 'dart:async'; // Para operaciones asíncronas
 
+// Función principal que inicia la aplicación.
 void main() {
-  runApp(MyApp());
+  runApp(MyApp()); // Ejecuta el widget MyApp
 }
 
-// Creamos el objeto.
+// Widget principal de la aplicación que es de tipo Stateless.
 class MyApp extends StatelessWidget {
-  // Crea el constructor
+  // Constructor con clave opcional
   const MyApp({super.key});
 
-  // Método del constructor
+  // Método build requerido para widgets Stateless.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomeCara());
+    return MaterialApp( 
+      home: HomeCara(), // Establece HomeCara como pantalla inicial
+    );
   }
 }
 
-// Creamos la clase HomeDado que será StatefulWidget ya que cambiará de estado debido al movimiento de las imagenes.
+// Como vamos a cambiar de estado, se necesita utilizar Stateful.
 class HomeCara extends StatefulWidget {
+  // Constructor.
   const HomeCara({super.key});
 
+  // Se crea el estado mutable para este widget
   @override
   State<HomeCara> createState() {
     return _HomeCaraState();
   }
 }
 
-// _ Significa que es privado.
+// Clase privada para HomeCara.
 class _HomeCaraState extends State<HomeCara> {
-  var _rutaCara = 'assets/images/comp1.jpeg'; // Variable para ruta de la imagenes. (Las imagenes deben tener un número al final de su nombre para poder hacer la lógica de aleatoridad).
-  var _i = 1; // Variable para la lógica de aleatoridad.
-  var _isAnimited = false; // Sirve para iniciar el movimiento de las imagenes.
 
-  // Es una función asincrona
+  var _rutaCara = 'assets/images/comp1.jpeg'; // Ruta de la imagen inicial.
+  var _i = 1; // Variable para almacenar el número aleatorio.
+  String _ganador = ''; // String para guardar el nombre del alumno ganador.
+  
+  // Bandera para controlar si la animación está en curso.
+  var _isAnimited = false;
+
+  // Lista de nombres.
+  final List<String> _alumnos = [
+    'Albert Alexis',
+    'Amelia Mendoza',
+    'Diana Belen',
+    'Rosendo Eden',
+    'Elton Yael',
+    'Sergio Elías',
+  ];
+
+  // Función asíncrona para animar y seleccionar ganador.
   Future<void> girarCara() async {
+    // Solo ejecuta si no hay animación en curso.
     if (!_isAnimited) {
-      _isAnimited =
-          true; // Cambia el estado de la variable a true para indicar que se esta animando.
+      _isAnimited = true; // Activamos la bandera de animación.
 
-      // Lista de Strings con la ruta de las imágenes.
+      // Lista de rutas de imágenes.
       List<String> listaRutas = [
         "assets/images/comp1.jpeg",
         "assets/images/comp2.jpeg",
@@ -53,104 +72,95 @@ class _HomeCaraState extends State<HomeCara> {
         "assets/images/comp6.jpeg",
       ];
 
-      // Variable que indica cuando dura la animación de movimiento entre imágenes.
-      var duracion = Duration(milliseconds: 200);
+      // Duración de cada frame de la animación
+      var duracion = Duration(milliseconds: 100); // Le puse 100ms para que se vea más rápido.
 
+      // Bucle para la animación.
       for (var cara in listaRutas) {
         setState(() {
-          _rutaCara = cara;
+          _rutaCara = cara; // Actualiza la imagen mostrada
         });
-        await Future.delayed(duracion);
+        await Future.delayed(duracion); // Espera antes del siguiente frame.
       }
 
-      // Aquí se realiza la lógica para mostrar la imagen aleatoria.
+      // Aquí se hace la selección final aleatoria.
       setState(() {
-        _i =
-            Random().nextInt(6) +
-            1; // La función Random asigna un número aleatorio a _i.
-        _rutaCara =
-            'assets/images/comp$_i.jpeg'; // El número aleatorio se agrega a la ruta de la imagen y se guarda en _rutaCara.
+        _i = Random().nextInt(6) + 1; // Número aleatorio 1-6
+        _rutaCara = 'assets/images/comp$_i.jpeg'; // Asigna la imagen aleatoria.
+        _ganador = _alumnos[_i - 1]; // Como las imagenes estan en el mismo orden que la lista de alumnos, pues solo necesitamos ocupar _i.
       });
-      _isAnimited = false;
+      _isAnimited = false; // Desactiva bandera de animación
     }
   }
 
+  // Método build para construir la interfaz.
   @override
   Widget build(BuildContext context) {
-    // Retorna un Scaffold que es la estructura básica de una pantalla en Flutter.
-    return Scaffold(
-      // El cuerpo de la pantalla es un Container con un gradiente radial de fondo.
+    return Scaffold( 
       body: Container(
         decoration: BoxDecoration(
-          // Agregamos el BoxDecoration para utilizar el gradiente.
           gradient: RadialGradient(
-            // Gradiente que va desde blanco a verde.
             colors: [
-              const Color.fromARGB(255, 255, 255, 255),
+              const Color.fromARGB(255, 255, 255, 255), 
               Color.fromRGBO(54, 130, 127, 1),
             ],
-            radius: 0.4, // Radio del gradiente (50% del tamaño del contenedor)
+            radius: 0.4, // Tamaño del gradiente.
           ),
         ),
-        // Centra todos los elementos hijos
+        // Contenido centrado
         child: Center(
-          // Organiza los elementos en una columna vertical
+          // Columna de elementos
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.center, // Centra verticalmente los elementos
+            mainAxisAlignment: MainAxisAlignment.center, // Centrado vertical
             children: [
-              // Contenedor para el texto del título
+              // Contenedor para el título.
               Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(
-                    255,
-                    255,
-                    255,
-                    1,
-                  ), // Container de color blanco.
-                  borderRadius: BorderRadius.circular(
-                    15,
-                  ), // Bordes redondeados.
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  borderRadius: BorderRadius.circular(15), // Bordes redondeados.
                 ),
-                width: 300,
+                width: 300, // Ancho fijo para el contenedor del título.
                 child: Text(
-                  "Alumnos del 603", // Texto del título.
-                  style: TextStyle(fontSize: 35),
-                  textAlign:
-                      TextAlign
-                          .center, // Se utiliza para centrar el texto dentro del container.
+                  "Alumnos del 603", // Texto del título
+                  style: TextStyle(fontSize: 35), // Tamaño de fuente.
+                  textAlign: TextAlign.center, // Texto centrado.
                 ),
               ),
-              SizedBox(
-                height: 80,
-              ), // Espaciador vertical de 80px para darle un mejor estilo a la app.
-              // Muestra una imagen cuya ruta está en la variable _rutaCara.
+              SizedBox(height: 80), // Espaciador para separar el título de la imagen.
+              
+              // Widget de imagen (muestra la imagen actual).
               Image.asset(
-                _rutaCara,
+                _rutaCara, // Ruta de la imagen.
                 width: 220,
-              ), // La imagen tendra un ancho de 220px.
+              ),
 
-              SizedBox(height: 40), // Espaciador vertical de 40px.
-              // Botón elevado que ejecuta la función girarCara al ser presionado.
-              ElevatedButton(
-                onPressed:
-                    girarCara, // Aquí se ejecuta la función al momento de presionar el botón.
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(
-                    255,
-                    255,
-                    255,
-                    255,
-                  ), // Fondo blanco
-                  textStyle: TextStyle(fontSize: 20), // Tamaño de texto del botón.
-                  foregroundColor: const Color.fromARGB(
-                    255,
-                    0,
-                    0,
-                    0,
-                  ), // Color del texto (negro)
+              SizedBox(height: 40), // Espaciador.
+              
+              // Contenedor del texto del ganador.
+              Container(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 255, 255, 10), 
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text("Girar Foto"), // Texto del botón
+                width: 350,
+                child: Text(
+                  "Ganador: $_ganador", // Muestra nombre del ganador.
+                  style: TextStyle(fontSize: 25),
+                  textAlign: TextAlign.center, // Texto centrado.
+                ),
+              ),
+              SizedBox(height: 20), // Espaciador.
+              
+              // Botón para iniciar el sorteo.
+              ElevatedButton.icon(
+                icon: Icon(Icons.play_circle_sharp), // Ícono de play
+                onPressed: girarCara, // Al presionar, llama a girarCara.
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  textStyle: TextStyle(fontSize: 20),
+                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                ),
+                label: Text("Girar Foto"), // Texto del botón
               ),
             ],
           ),
