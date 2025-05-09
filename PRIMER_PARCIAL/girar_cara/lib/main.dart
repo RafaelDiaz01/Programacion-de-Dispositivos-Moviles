@@ -64,11 +64,8 @@ class _HomeCaraState extends State<HomeCara> {
 
       // Aquí se realiza la lógica para mostrar la imagen aleatoria.
       setState(() {
-        _i =
-            Random().nextInt(6) +
-            1; // La función Random asigna un número aleatorio a _i.
-        _rutaCara =
-            'assets/images/comp$_i.jpeg'; // El número aleatorio se agrega a la ruta de la imagen y se guarda en _rutaCara.
+        _i = Random().nextInt(6) + 1; // La función Random asigna un número aleatorio a _i.
+        _rutaCara = 'assets/images/comp$_i.jpeg'; // El número aleatorio se agrega a la ruta de la imagen y se guarda en _rutaCara.
       });
       _isAnimited = false;
     }
