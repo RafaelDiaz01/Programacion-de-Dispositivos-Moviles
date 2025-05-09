@@ -40,7 +40,8 @@ class _HomeCaraState extends State<HomeCara> {
   // Es una función asincrona
   Future<void> girarCara() async {
     if (!_isAnimited) {
-      _isAnimited = true; // Cambia el estado de la variable a true para indicar que se esta animando.
+      _isAnimited =
+          true; // Cambia el estado de la variable a true para indicar que se esta animando.
 
       // Lista de Strings con la ruta de las imágenes.
       List<String> listaRutas = [
@@ -126,8 +127,9 @@ class _HomeCaraState extends State<HomeCara> {
               // Muestra una imagen cuya ruta está en la variable _rutaCara.
               Image.asset(
                 _rutaCara,
-                width: 220, // La imagen tendra un ancho de 220px.
-              ), 
+                width: 220,
+              ), // La imagen tendra un ancho de 220px.
+
               SizedBox(height: 40), // Espaciador vertical de 40px.
               // Botón elevado que ejecuta la función girarCara al ser presionado.
               ElevatedButton(
