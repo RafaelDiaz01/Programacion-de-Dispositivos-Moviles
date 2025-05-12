@@ -65,43 +65,53 @@ class _MyAppState extends State<MyApp> {
       screen = QuizBody(addSelectedAnswer: addSelectedAnswer);
     } 
 
-    if (currentScreen == "results-screen") {
+    if (currentScreen == "results-screen") { // Si la pantalla actual es la de resultados, entonces se muestra la pantalla de resultados.
       screen = QuizResults(selectedAnswers: selectedAnswers, home: home,);
+      // Se pasa la lista de respuestas seleccionadas y la función home como parámetros a la pantalla de resultados.
+      // La función home se utiliza para regresar a la pantalla de inicio.
     }
     return MaterialApp(
       title: 'Quiz App',
-      theme: ThemeData(
+      theme: ThemeData( // Tema de la aplicación.
         scaffoldBackgroundColor: Color.fromRGBO(158, 198, 243, 10),
-        elevatedButtonTheme: ElevatedButtonThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData( // Tema de los botones elevados.
           style: ElevatedButton.styleFrom(
             backgroundColor: Color.fromRGBO(255, 241, 213, 10),
             foregroundColor: Color.fromRGBO(0, 0, 0, 10),
             textStyle: TextStyle(fontSize: 25),
-            iconSize: 20,
+            iconSize: 20, // Tamaño del icono del botón.
           ),
         ),
       ),
-      home: screen,
+      home: screen, // Pantalla que se va a mostrar, dependiendo del valor de currentScreen.
+      // Si el valor de currentScreen es "home-screen", se mostrará la pantalla de inicio.
+      // Si el valor de currentScreen es "question-screen", se mostrará la pantalla de preguntas.
+      // Si el valor de currentScreen es "results-screen", se mostrará la pantalla de resultados.
+      // En este caso, se mostrará la pantalla de inicio.
     );
   }
 }
 
+// Pantalla de inicio de la aplicación.
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.startQuiz});
+  const MyHomePage({super.key, required this.startQuiz}); // Constructor de la pantalla de inicio.
 
+  // Esta pantalla recibe una función como parámetro, que se utiliza para cambiar la pantalla a la de preguntas.
+  // Esta función se pasa como parámetro desde la clase MyApp.
   final void Function() startQuiz;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  // Método build que construye la interfaz de la pantalla de inicio.
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      body: Center( // Centro de la pantalla.
+        // El widget Center centra su hijo en la pantalla.
+        child: Column( // Columna que contiene los widgets de la pantalla de inicio.
+          mainAxisAlignment: MainAxisAlignment.center, // Alinea los widgets en el centro de la pantalla.
+          children: [ // Lista de widgets que se van a mostrar en la pantalla de inicio.
             Image.asset('assets/images/quiz.png', width: 250),
-            const SizedBox(height: 25),
-            ElevatedButton.icon(
-              onPressed: startQuiz,
-              icon: Icon(Icons.play_circle_fill),
+            const SizedBox(height: 25), // Espacio entre la imagen y el texto.
+            ElevatedButton.icon( // Botón elevado que inicia el quiz.
+              onPressed: startQuiz, // Función que se ejecuta al presionar el botón.
+              icon: Icon(Icons.play_circle_fill), // Icono play del botón.
               label: Text("Iniciar"),
             ),
           ],
