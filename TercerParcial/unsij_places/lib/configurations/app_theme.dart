@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 // Sirve para definir el tema de la aplicacion.
 final appColorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
-  seedColor: const Color.fromARGB(255, 21, 117, 12),
-  surface: const Color.fromARGB(255, 21, 117, 12),
+  seedColor: const Color.fromARGB(255, 96, 108, 56),
+  surface: const Color.fromARGB(255, 96, 108, 56),
 );
 
 // Varible final que define el estilo que se le dara a los textos de la aplicacion.
