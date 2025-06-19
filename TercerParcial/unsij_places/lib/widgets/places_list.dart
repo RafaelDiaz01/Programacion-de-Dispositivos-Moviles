@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unsij_places/domain/place.dart';
+import 'package:unsij_places/screens/place_info_screen.dart';
 
 class PlacesList extends StatelessWidget {
   const PlacesList({super.key, required this.places});
@@ -16,13 +17,13 @@ class PlacesList extends StatelessWidget {
             Card(
               color: Color.fromARGB(255, 255, 255, 255),
               child: Padding(
-                padding: EdgeInsets.all(25),
+                padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
                     Text(
                       'Todavía no se han agregado lugares',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 20,
                         color: const Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
@@ -51,7 +52,17 @@ class PlacesList extends StatelessWidget {
     }
     return ListView.builder(
       itemBuilder:
-          (context, index) => ListTile(title: Text(places[index].name), hoverColor: Colors.amber,),
+          (context, index) => ListTile(
+            title: Text(places[index].name),
+            hoverColor: Colors.amber,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PlaceInfoScreen(place: places[index]),
+                ),
+              );
+            },
+          ),
       itemCount: places.length,
     );
   }

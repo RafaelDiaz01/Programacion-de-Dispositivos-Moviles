@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:unsij_places/providers/place_provider.dart';
+import 'package:unsij_places/domain/place.dart';
+import 'package:unsij_places/widgets/photo_picker.dart';
 
-class AddPlaceScreen extends StatefulWidget {
+class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
 
   @override
-  State<AddPlaceScreen> createState() => _AddPlaceScreenState();
+  ConsumerState<AddPlaceScreen> createState() => _AddPlaceScreenState();
 }
 
-class _AddPlaceScreenState extends State<AddPlaceScreen> {
+class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _nameController = TextEditingController();
+
+  void _addToPlaces() {
+    final enteredName = _nameController.text;
+    if (enteredName.isNotEmpty) {
+      Place newPlace = Place(name: enteredName);
+      ref.read(placesProvider.notifier).addPlace(newPlace);
+      Navigator.of(context).pop(); // Cierra la pantalla de agregar lugar
+    }
+  }
 
   @override
   void dispose() {
@@ -44,16 +57,18 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 ),
               ),
               const SizedBox(height: 20),
+              PhotoPicker(), // Widget para seleccionar o tomar una foto
+              const SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 188, 108, 37),
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {
-                  // Aquí se puede agregar la lógica para guardar el lugar
-                  Navigator.pop(context);
-                },
-                child: const Text('Guardar Lugar', style: TextStyle(fontSize: 20),),
+                onPressed: _addToPlaces,
+                child: const Text(
+                  'Guardar Lugar',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
             ],
           ),
